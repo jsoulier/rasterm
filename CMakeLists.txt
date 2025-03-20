@@ -13,6 +13,11 @@ if(WIN32)
         term_win32.c
     )
 else()
+    add_executable(rasterm
+        main.c
+        render.c
+        term_posix.c
+    )
     message(FATAL_ERROR "Not Implemented")
 endif()
 set_target_properties(rasterm PROPERTIES C_STANDARD 11)

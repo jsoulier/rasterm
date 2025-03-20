@@ -1,7 +1,6 @@
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <stdio.h>
 #include "term.h"
+#include "win32.h"
 
 int get_width()
 {
@@ -12,7 +11,7 @@ int get_width()
     }
     else
     {
-        printf("Failed to get console width\n");
+        printf("Failed to get terminal width\n");
         return -1;
     }
 }
@@ -26,7 +25,7 @@ int get_height()
     }
     else
     {
-        printf("Failed to get console height\n");
+        printf("Failed to get terminal height\n");
         return -1;
     }
 }
