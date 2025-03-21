@@ -9,8 +9,10 @@ typedef struct
     vertex_t* vertices;
     uint32_t size;
 }
-model_t;
+mesh_t;
 
-bool load_model(
-    model_t* model,
+bool load_mesh(
+    mesh_t* mesh,
     const char* path);
+void free_mesh(
+    mesh_t* mesh);

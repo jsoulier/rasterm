@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "mesh.h"
 #include "render.h"
 #include "term.h"
 
@@ -68,7 +69,7 @@ void resize()
         pixels[y * width + x][4] = 'm';
         pixels[y * width + x][5] = PIXEL;
     }
-    for (int y = 0; y < height; y++)
+    for (int y = 1; y < height; y++)
     {
         pixels[y * width - 1][5] = '\n';
     }
@@ -76,7 +77,7 @@ void resize()
 }
 
 void render(
-    const model_t* model)
+    const mesh_t* mesh)
 {
     if (!depths || !pixels)
     {

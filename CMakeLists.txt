@@ -8,9 +8,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${BINARY_DIR})
 
 add_executable(rasterm
     main.c
-    model.c
-    model_gltf.c
-    model_obj.c
+    mesh.c
+    mesh_gltf.c
+    mesh_obj.c
     render.c
     stb.c
 )

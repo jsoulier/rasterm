@@ -1,9 +1,9 @@
 #include <stdbool.h>
-#include "model.h"
+#include "mesh.h"
 
 /* not implemented */
-bool load_gltf_model(
-    model_t* model,
+bool load_gltf_mesh(
+    mesh_t* mesh,
     const char* path)
 {
     return false;

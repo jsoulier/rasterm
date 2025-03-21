@@ -11,10 +11,11 @@ typedef struct
     position;
     struct
     {
-        float x;
-        float y;
+        float r;
+        float g;
+        float b;
     }
-    uv;
+    colour;
     struct
     {
         float x;

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <stdbool.h>
-#include "model.h"
+#include "mesh.h"
 
 bool init_render();
 void resize();
 void render(
-    const model_t* model);
+    const mesh_t* mesh);
 void free_render();
