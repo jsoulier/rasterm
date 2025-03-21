@@ -11,6 +11,7 @@ add_executable(rasterm
     mesh.c
     mesh_gltf.c
     mesh_obj.c
+    path.c
     render.c
     stb.c
 )

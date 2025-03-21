@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mesh.h"
+#include "path.h"
 #include "stb_image.h"
 #include "vertex.h"
 
@@ -24,20 +25,10 @@ static bool load_mtl(
     const char* filename)
 {
     char path[256] = {0};
-    strncpy(path, root, sizeof(path));
-    char* seperator;
-    char* forward = strrchr(path, '/');
-    char* backward = strrchr(path, '\\');
-    if (forward < backward)
+    if (!set_filename(root, filename, path))
     {
-        seperator = backward;
+        return false;
     }
-    else
-    {
-        seperator = forward;
-    }
-    *seperator = '\0';
-    strncat(seperator, filename, path - seperator);
     FILE* file = fopen(path, "r");
     if (!file)
     {
@@ -57,24 +48,35 @@ static bool load_mtl(
         {
             if (material->data)
             {
-                printf("Image already set\n");
+                printf("Material already set\n");
                 return false;
             }
-            sscanf(line, "newmtl %s", path);
+            char name[256] = {0};
+            sscanf(line, "map_Kd %s", name);
+            if (!set_filename(root, name, path))
+            {
+                return false;
+            }
             material->data = stbi_load(path,
                 &material->width,
                 &material->height,
                 &material->channels, 3);
-            if (material->data)
+            if (!material->data)
             {
-                printf("Failed to load image: %s\n", path);
+                printf("Failed to load material: %s, %s\n",
+                    path, stbi_failure_reason());
                 return false;
             }
         }
     }
+    if (!material->name[0])
+    {
+        printf("No name set: %s\n", path);
+        return false;
+    }
     if (!material->data)
     {
-        printf("No image set: %s\n", path);
+        printf("No material set: %s\n", path);
         return false;
     }
     fclose(file);
@@ -153,6 +155,7 @@ bool load_obj_mesh(
                 printf("Failed to load material: %s\n", name);
                 return false;
             }
+            num_materials++;
         }
         else if (!strncmp(line, "usemtl ", 7))
         {
@@ -185,7 +188,7 @@ bool load_obj_mesh(
         {
             if (!material)
             {
-                printf("No material being used\n");
+                printf("No material set\n");
                 return false;
             }
             float u;
@@ -244,7 +247,7 @@ bool load_obj_mesh(
     }
     for (uint32_t i = 0; i < num_materials; i++)
     {
-        free(materials[i].data);
+        stbi_image_free(materials[i].data);
     }
     free(materials);
     free(positions);
