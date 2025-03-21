@@ -5,8 +5,9 @@
 #include "render.h"
 #include "term.h"
 
-/* terminal chars/codes */
 static const char PIXEL = '#';
+
+/* ansi sequences */
 static const char* REWIND = "\033[H\033[2J";
 static const char* HIDE = "\033[?25l";
 static const char* BLACK = "30";
@@ -26,6 +27,7 @@ static const char* WHITE = "37";
  */
 typedef char pixel_t[6];
 
+/* framebuffer */
 static float* depths;
 static pixel_t* pixels;
 static int width;
@@ -73,7 +75,8 @@ void resize()
     pixels[w * h - 1][0] = '\0';
 }
 
-void render()
+void render(
+    const model_t* model)
 {
     if (!depths || !pixels)
     {
@@ -87,7 +90,7 @@ void render()
         pixels[y * width + x][3] = BLACK[1];
     }
 
-    /* TODO: */
+    /* todo */
     for (int x = 0; x < width; x++)
     for (int y = 0; y < height; y++)
     {

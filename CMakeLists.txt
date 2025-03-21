@@ -6,18 +6,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${BINARY_DIR})
 
+add_executable(rasterm
+    main.c
+    model.c
+    model_gltf.c
+    model_obj.c
+    render.c
+    stb.c
+)
 if(WIN32)
-    add_executable(rasterm
-        main.c
-        render.c
+    target_sources(rasterm PUBLIC
         term_win32.c
     )
 else()
-    add_executable(rasterm
-        main.c
-        render.c
+    target_sources(rasterm PUBLIC
         term_posix.c
     )
-    message(FATAL_ERROR "Not Implemented")
 endif()
 set_target_properties(rasterm PROPERTIES C_STANDARD 11)

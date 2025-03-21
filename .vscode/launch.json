@@ -6,6 +6,9 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/bin/rasterm.exe",
+            "args": [
+                "models/cube/cube.obj"
+            ],
             "cwd": "${workspaceFolder}/build/bin",
             "preLaunchTask": "CMake: build",
             "console": "externalTerminal",
