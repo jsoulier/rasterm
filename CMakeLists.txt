@@ -8,6 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${BINARY_DIR})
 
 add_executable(rasterm
     main.c
+    matrix.c
     mesh.c
     mesh_gltf.c
     mesh_obj.c
@@ -25,3 +26,7 @@ else()
     )
 endif()
 set_target_properties(rasterm PROPERTIES C_STANDARD 11)
+find_library(LIBM m)
+if(LIBM)
+    target_link_libraries(rasterm m)
+endif()

@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "matrix.h"
 #include "mesh.h"
 #include "render.h"
 #include "term.h"
